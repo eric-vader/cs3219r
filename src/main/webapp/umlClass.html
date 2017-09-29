@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html style="width: 100%; height: 100%" >
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UML Class Nodes</title>
+<meta name="description"
+	content="UML Class-like nodes showing two collapsible lists of items." />
+<!-- Copyright 1998-2017 by Northwoods Software Corporation. -->
+<meta charset="UTF-8">
+<script src="../release/go.js"></script>
+
+<script id="code">
+  function init(diagram_data) {
+	nodedata = diagram_data.nodes;
+	linkdata = diagram_data.links;
+    if (window.goSamples) goSamples();  // init for these samples -- you don't need to call this
+    var $ = go.GraphObject.make;
+
+    myDiagram =
+      $(go.Diagram, "myDiagramDiv",
+        {
+          initialContentAlignment: go.Spot.Center,
+          "undoManager.isEnabled": true,
+          allowVerticalScroll: false,
+          allowHorizontalScroll: false,
+          layout: $(go.TreeLayout,
+                    { // this only lays out in trees nodes connected by "generalization" links
+                      angle: 90,
+                      path: go.TreeLayout.PathSource,  // links go from child to parent
+                      setsPortSpot: false,  // keep Spot.AllSides for link connection spot
+                      setsChildPortSpot: false,  // keep Spot.AllSides
+                      // nodes not connected by "generalization" links are laid out horizontally
+                      arrangement: go.TreeLayout.ArrangementHorizontal
+                    })
+        });
+    
+    // show visibility or access as a single character at the beginning of each property or method
+    function convertVisibility(v) {
+      switch (v) {
+        case "_public": return "+";
+        case "_private": return "-";
+        case "_protected": return "#";
+        case "_package": return "~";
+        default: return v;
+      }
+    }
+
+    // the item template for properties
+    var propertyTemplate =
+      $(go.Panel, "Horizontal",
+        // property visibility/access
+        $(go.TextBlock,
+          { isMultiline: false, editable: false, width: 12 },
+          new go.Binding("text", "visibility", convertVisibility)),
+        // property name, underlined if scope=="class" to indicate static property
+        $(go.TextBlock,
+          { isMultiline: false, editable: true },
+          new go.Binding("text", "name").makeTwoWay(),
+          new go.Binding("isUnderline", "scope", function(s) { return s[0] === 'c' })),
+        // property type, if known
+        $(go.TextBlock, "",
+          new go.Binding("text", "type", function(t) { return (t ? ": " : ""); })),
+        $(go.TextBlock,
+          { isMultiline: false, editable: true },
+          new go.Binding("text", "type").makeTwoWay()),
+        // property default value, if any
+        $(go.TextBlock,
+          { isMultiline: false, editable: false },
+          new go.Binding("text", "default", function(s) { return s ? " = " + s : ""; }))
+      );
+
+    // the item template for methods
+    var methodTemplate =
+      $(go.Panel, "Horizontal",
+        // method visibility/access
+        $(go.TextBlock,
+          { isMultiline: false, editable: false, width: 12 },
+          new go.Binding("text", "visibility", convertVisibility)),
+        // method name, underlined if scope=="class" to indicate static method
+        $(go.TextBlock,
+          { isMultiline: false, editable: true },
+          new go.Binding("text", "name").makeTwoWay(),
+          new go.Binding("isUnderline", "scope", function(s) { return s[0] === 'c' })),
+        // method parameters
+        $(go.TextBlock, "()",
+          // this does not permit adding/editing/removing of parameters via inplace edits
+          new go.Binding("text", "parameters", function(parr) {
+              var s = "(";
+              for (var i = 0; i < parr.length; i++) {
+                var param = parr[i];
+                if (i > 0) s += ", ";
+                s += param.name + ": " + param.type;
+              }
+              return s + ")";
+          })),
+        // method return type, if any
+        $(go.TextBlock, "",
+          new go.Binding("text", "type", function(t) { return (t ? ": " : ""); })),
+        $(go.TextBlock,
+          { isMultiline: false, editable: true },
+          new go.Binding("text", "type").makeTwoWay())
+      );
+
+    // this simple template does not have any buttons to permit adding or
+    // removing properties or methods, but it could!
+    myDiagram.nodeTemplate =
+      $(go.Node, "Auto",
+        {
+          locationSpot: go.Spot.Center,
+          fromSpot: go.Spot.AllSides,
+          toSpot: go.Spot.AllSides
+        },
+        $(go.Shape, { fill: "lightyellow" }),
+        $(go.Panel, "Table",
+          { defaultRowSeparatorStroke: "black" },
+          // header
+          $(go.TextBlock,
+            {
+              row: 0, columnSpan: 2, margin: 3, alignment: go.Spot.Center,
+              font: "bold 12pt sans-serif",
+              isMultiline: false, editable: true
+            },
+            new go.Binding("text", "name").makeTwoWay()),
+          // properties
+          $(go.TextBlock, "Properties",
+            { row: 1, font: "italic 10pt sans-serif" },
+            new go.Binding("visible", "visible", function(v) { return !v; }).ofObject("PROPERTIES")),
+          $(go.Panel, "Vertical", { name: "PROPERTIES" },
+            new go.Binding("itemArray", "properties"),
+            {
+              row: 1, margin: 3, stretch: go.GraphObject.Fill,
+              defaultAlignment: go.Spot.Left, background: "lightyellow",
+              itemTemplate: propertyTemplate
+            }
+          ),
+          $("PanelExpanderButton", "PROPERTIES",
+            { row: 1, column: 1, alignment: go.Spot.TopRight, visible: false },
+            new go.Binding("visible", "properties", function(arr) { return arr.length > 0; })),
+          // methods
+          $(go.TextBlock, "Methods",
+            { row: 2, font: "italic 10pt sans-serif" },
+            new go.Binding("visible", "visible", function(v) { return !v; }).ofObject("METHODS")),
+          $(go.Panel, "Vertical", { name: "METHODS" },
+            new go.Binding("itemArray", "methods"),
+            {
+              row: 2, margin: 3, stretch: go.GraphObject.Fill,
+              defaultAlignment: go.Spot.Left, background: "lightyellow",
+              itemTemplate: methodTemplate
+            }
+          ),
+          $("PanelExpanderButton", "METHODS",
+            { row: 2, column: 1, alignment: go.Spot.TopRight, visible: false },
+            new go.Binding("visible", "methods", function(arr) { return arr.length > 0; }))
+        )
+      );
+
+    function convertIsTreeLink(r) {
+      return r === "_generalization";
+    }
+
+    function convertFromArrow(r) {
+      switch (r) {
+        case "_generalization": return "";
+        default: return "";
+      }
+    }
+
+    function convertToArrow(r) {
+      switch (r) {
+        case "_generalization": return "Triangle";
+        case "_aggregation": return "StretchedDiamond";
+        default: return "";
+      }
+    }
+
+    myDiagram.linkTemplate =
+      $(go.Link,
+        { routing: go.Link.Orthogonal },
+        new go.Binding("isLayoutPositioned", "relationship", convertIsTreeLink),
+        $(go.Shape),
+        $(go.Shape, { scale: 1.3, fill: "white" },
+          new go.Binding("fromArrow", "relationship", convertFromArrow)),
+        $(go.Shape, { scale: 1.3, fill: "white" },
+          new go.Binding("toArrow", "relationship", convertToArrow))
+      );
+    
+    myDiagram.model = $(go.GraphLinksModel,
+      {
+        copiesArrays: true,
+        copiesArrayObjects: true,
+        nodeDataArray: nodedata,
+        linkDataArray: linkdata
+      });
+  }
+  // setup a few example class nodes and relationships
+  var nodes_data = [
+    {
+      key: 1,
+      name: "BankAccount",
+      properties: [
+        { name: "owner", type: "String", visibility: "_public" },
+        { name: "balance", type: "Currency", visibility: "_public", default: "0" }
+      ],
+      methods: [
+        { name: "deposit", parameters: [{ name: "amount", type: "Currency" }], visibility: "_public" },
+        { name: "withdraw", parameters: [{ name: "amount", type: "Currency" }], visibility: "_public" }
+      ]
+    },
+    {
+      key: 11,
+      name: "Person",
+      properties: [
+        { name: "name", type: "String", visibility: "_public" },
+        { name: "birth", type: "Date", visibility: "_protected" }
+      ],
+      methods: [
+        { name: "getCurrentAge", type: "int", visibility: "_public" }
+      ]
+    },
+    {
+      key: 12,
+      name: "Student",
+      properties: [
+        { name: "classes", type: "List<Course>", visibility: "_public" }
+      ],
+      methods: [
+        { name: "attend", parameters: [{ name: "class", type: "Course" }], visibility: "_private" },
+        { name: "sleep", visibility: "_private" }
+      ]
+    },
+    {
+      key: 13,
+      name: "Professor",
+      properties: [
+        { name: "classes", type: "List<Course>", visibility: "_public" }
+      ],
+      methods: [
+        { name: "teach", parameters: [{ name: "class", type: "Course" }], visibility: "_private" }
+      ]
+    },
+    {
+      key: 14,
+      name: "Course",
+      properties: [
+        { name: "name", type: "String", visibility: "_public" },
+        { name: "description", type: "String", visibility: "_public" },
+        { name: "professor", type: "Professor", visibility: "_public" },
+        { name: "location", type: "String", visibility: "_public" },
+        { name: "times", type: "List<Time>", visibility: "_public" },
+        { name: "prerequisites", type: "List<Course>", visibility: "_public" },
+        { name: "students", type: "List<Student>", visibility: "_public" }
+      ]
+    }
+  ];
+  var links_data = [
+    { from: 12, to: 11, relationship: "_generalization" },
+    { from: 13, to: 11, relationship: "_generalization" },
+    { from: 14, to: 13, relationship: "_aggregation" }
+  ];
+  var diagram_data = {
+	nodes: nodes_data,
+	links: links_data
+  };
+  var diagram_json = '{"nodes":[{"key":521645586,"name":"Diagram","properties":[{"name":"nodes","type":"List\u003cNode\u003e","visibility":"_private"},{"name":"links","type":"List\u003cLink\u003e","visibility":"_private"}],"methods":[{"name":"getNodes","parameters":[],"visibility":"_public"},{"name":"setNodes","parameters":[{"name":"arg0","type":"List\u003cNode\u003e"}],"visibility":"_public"},{"name":"getLinks","parameters":[],"visibility":"_public"},{"name":"setLinks","parameters":[{"name":"arg0","type":"List\u003cLink\u003e"}],"visibility":"_public"}]},{"key":1296064247,"name":"Link","properties":[{"name":"from","type":"int","visibility":"_private"},{"name":"to","type":"int","visibility":"_private"},{"name":"relationship","type":"Relationship","visibility":"_private"}],"methods":[{"name":"getRelationship","parameters":[],"visibility":"_public"},{"name":"getFrom","parameters":[],"visibility":"_public"},{"name":"setFrom","parameters":[{"name":"arg0","type":"int"}],"visibility":"_public"},{"name":"getTo","parameters":[],"visibility":"_public"},{"name":"setTo","parameters":[{"name":"arg0","type":"int"}],"visibility":"_public"},{"name":"setRelationship","parameters":[{"name":"arg0","type":"Relationship"}],"visibility":"_public"}]},{"key":1637070917,"name":"Method","properties":[{"name":"name","type":"String","visibility":"_private"},{"name":"parameters","type":"List\u003cParameter\u003e","visibility":"_private"},{"name":"visibility","type":"Visibility","visibility":"_private"}],"methods":[{"name":"setVisibility","parameters":[{"name":"visibility","type":"Visibility"}],"visibility":"_public"},{"name":"setParameters","parameters":[{"name":"parameters","type":"List\u003cParameter\u003e"}],"visibility":"_public"},{"name":"getVisibility","parameters":[],"visibility":"_public"},{"name":"getName","parameters":[],"visibility":"_public"},{"name":"setName","parameters":[{"name":"name","type":"String"}],"visibility":"_public"},{"name":"getParameters","parameters":[],"visibility":"_public"}]},{"key":780237624,"name":"Node","properties":[{"name":"key","type":"int","visibility":"_private"},{"name":"name","type":"String","visibility":"_private"},{"name":"properties","type":"List\u003cProperty\u003e","visibility":"_private"},{"name":"methods","type":"List\u003cMethod\u003e","visibility":"_private"}],"methods":[{"name":"setKey","parameters":[{"name":"arg0","type":"int"}],"visibility":"_public"},{"name":"setMethods","parameters":[{"name":"arg0","type":"List\u003cMethod\u003e"}],"visibility":"_public"},{"name":"getName","parameters":[],"visibility":"_public"},{"name":"getMethods","parameters":[],"visibility":"_public"},{"name":"getKey","parameters":[],"visibility":"_public"},{"name":"getProperties","parameters":[],"visibility":"_public"},{"name":"setProperties","parameters":[{"name":"arg0","type":"List\u003cProperty\u003e"}],"visibility":"_public"},{"name":"setName","parameters":[{"name":"arg0","type":"String"}],"visibility":"_public"}]},{"key":205797316,"name":"Parameter","properties":[{"name":"name","type":"String","visibility":"_private"},{"name":"type","type":"String","visibility":"_private"}],"methods":[{"name":"setType","parameters":[{"name":"type","type":"String"}],"visibility":"_public"},{"name":"getName","parameters":[],"visibility":"_public"},{"name":"setName","parameters":[{"name":"name","type":"String"}],"visibility":"_public"},{"name":"getType","parameters":[],"visibility":"_public"}]},{"key":1128032093,"name":"Property","properties":[{"name":"name","type":"String","visibility":"_private"},{"name":"type","type":"String","visibility":"_private"},{"name":"visibility","type":"Visibility","visibility":"_private"}],"methods":[{"name":"setVisibility","parameters":[{"name":"visibility","type":"Visibility"}],"visibility":"_public"},{"name":"getVisibility","parameters":[],"visibility":"_public"},{"name":"classString","parameters":[{"name":"ea_field_java","type":"Field"}],"visibility":"_public"},{"name":"isAggregateType","parameters":[{"name":"fromClass","type":"Class\u003c?\u003e"},{"name":"toField","type":"Field"}],"visibility":"_public"},{"name":"setType","parameters":[{"name":"type","type":"String"}],"visibility":"_public"},{"name":"getName","parameters":[],"visibility":"_public"},{"name":"setName","parameters":[{"name":"name","type":"String"}],"visibility":"_public"},{"name":"getType","parameters":[],"visibility":"_public"}]},{"key":1066516207,"name":"Relationship","properties":[{"name":"_generalization","type":"Relationship","visibility":"_public"},{"name":"_aggregation","type":"Relationship","visibility":"_public"},{"name":"_noRel","type":"Relationship","visibility":"_public"},{"name":"$VALUES","type":"Relationship[]","visibility":"_private"}],"methods":[{"name":"toRelationship","parameters":[{"name":"arg0","type":"Class\u003c?\u003e"},{"name":"arg1","type":"Class\u003c?\u003e"}],"visibility":"_public"},{"name":"values","parameters":[],"visibility":"_public"},{"name":"valueOf","parameters":[{"name":"arg0","type":"String"}],"visibility":"_public"}]},{"key":443308702,"name":"Visibility","properties":[{"name":"_public","type":"Visibility","visibility":"_public"},{"name":"_private","type":"Visibility","visibility":"_public"},{"name":"_protected","type":"Visibility","visibility":"_public"},{"name":"_package","type":"Visibility","visibility":"_public"},{"name":"$VALUES","type":"Visibility[]","visibility":"_private"}],"methods":[{"name":"toVisibility","parameters":[{"name":"arg0","type":"int"}],"visibility":"_public"},{"name":"values","parameters":[],"visibility":"_public"},{"name":"valueOf","parameters":[{"name":"arg0","type":"String"}],"visibility":"_public"}]}],"links":[{"from":1296064247,"to":521645586,"relationship":"_aggregation"},{"from":1637070917,"to":780237624,"relationship":"_aggregation"},{"from":780237624,"to":521645586,"relationship":"_aggregation"},{"from":205797316,"to":1637070917,"relationship":"_aggregation"},{"from":1128032093,"to":780237624,"relationship":"_aggregation"},{"from":1066516207,"to":1296064247,"relationship":"_aggregation"},{"from":1066516207,"to":1066516207,"relationship":"_aggregation"},{"from":443308702,"to":1637070917,"relationship":"_aggregation"},{"from":443308702,"to":1128032093,"relationship":"_aggregation"},{"from":443308702,"to":443308702,"relationship":"_aggregation"}]}';
+  console.log(JSON.stringify(diagram_data));
+  //init(diagram_data); 
+</script>
+</head>
+<body style="margin:0px; width: 100%; height: 100%" onload="init(JSON.parse(diagram_json));">
+	<div id="myDiagramDiv"
+		style="width: 100%; height: 100%"></div>
+</body>
+</html>
