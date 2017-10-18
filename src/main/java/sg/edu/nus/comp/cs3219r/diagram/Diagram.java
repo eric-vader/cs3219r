@@ -21,7 +21,7 @@ public class Diagram {
       // Now check if this class has relation with the rest
       for(Class<?> eaClassOther:classes) {
         Link eaLink = new Link(eaClass, eaClassOther);
-        if(eaLink.getRelationship()!=Relationship._noRel) {
+        if(eaLink.getRelationship()!= Relationship._noRel) {
           links.add(eaLink);
         }
       }

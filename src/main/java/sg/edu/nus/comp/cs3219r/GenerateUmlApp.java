@@ -1,5 +1,9 @@
 package sg.edu.nus.comp.cs3219r;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 import com.google.gson.Gson;
@@ -21,13 +25,27 @@ import sg.edu.nus.comp.cs3219r.diagram.Visibility;
  *
  */
 public class GenerateUmlApp {
-  public static void main(String[] args) {
+
+  
+
+  public static void main(String[] args) throws IOException {
+    
+    String outputDir = Utils.getAbsResourcePath(Utils.umlBasePath);
+    
     Gson gson_p = new GsonBuilder().setPrettyPrinting().create();
     Gson gson = new Gson();
+    
+    // Generate the diagram
     Diagram d = new Diagram(Arrays.asList(new Class[] {Diagram.class,
         Link.class, Method.class, Node.class, Parameter.class, Property.class,
         Relationship.class, Visibility.class}));
+
+
+    Path path = Paths.get(outputDir + "/test.json");
+    byte[] strToBytes = gson.toJson(d).getBytes();
+    Files.write(path, strToBytes);
+
     System.out.println(gson_p.toJson(d));
-    System.out.println(gson.toJson(d));
+    
   }
 }

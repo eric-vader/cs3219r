@@ -18,6 +18,14 @@ public class Property {
   private String name;
   private String type;
   private Visibility visibility;
+  
+  /**
+   * Constructs a property that represents an enum value.
+   * @param name
+   */
+  public Property(String name) {
+    this.name = name;
+  }
 
   public Property(final Field ea_field_java) {
     this.setName(ea_field_java.getName());

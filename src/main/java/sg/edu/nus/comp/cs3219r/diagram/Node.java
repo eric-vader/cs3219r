@@ -2,6 +2,7 @@ package sg.edu.nus.comp.cs3219r.diagram;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -18,6 +19,20 @@ public class Node {
   private List<Method> methods;
 
   public Node(Class<?> clazz) {
+    
+    if(clazz.isEnum()) {
+      this.setName("<<enum>> : " + clazz.getSimpleName());
+      this.setKey(clazz.hashCode());
+      
+      List<Property> properties = new ArrayList<Property>();
+      this.setProperties(properties);
+      for (Object eaEnumVal : Arrays.asList(clazz.getEnumConstants())) {
+        properties.add(new Property(eaEnumVal.toString()));
+      }
+      
+      return;
+    }
+    
     this.setName(clazz.getSimpleName());
     this.setKey(clazz.hashCode());
 

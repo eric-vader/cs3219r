@@ -5,18 +5,21 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 
+import sg.edu.nus.comp.cs3219r.Utils;
+
 /**
  * Part of the template class, to translate the 
  * @author Han Liang Wee, Eric(A0065517A)
  *
  */
-public class HtmlHelper {
+public class TemplateHelper {
 
   private HashMap<String, Template> templates;
   private String htmlFile;
   
-  public HtmlHelper(Path basePath) throws IOException {
-    htmlFile = new String(Files.readAllBytes(basePath));
+  public TemplateHelper(String fileName) throws IOException {
+    this.templates = new HashMap<>();
+    htmlFile = Utils.resourceToString(Utils.templatesBasePath, fileName + Utils.templateExtension);
   }
   
   /**

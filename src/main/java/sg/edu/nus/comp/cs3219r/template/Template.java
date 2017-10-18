@@ -8,19 +8,9 @@ package sg.edu.nus.comp.cs3219r.template;
  *
  */
 public abstract class Template {
-
-  private String fileContents;
   
-  abstract String key();
+  abstract public String key();
 
-  abstract String value();
-
-  public String getFileContents() {
-    return fileContents;
-  }
-
-  public void setFileContents(String fileContents) {
-    this.fileContents = fileContents;
-  }
+  abstract public String value();
   
 }
