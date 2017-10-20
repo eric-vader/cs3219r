@@ -21,7 +21,7 @@ public class Node {
   public Node(Class<?> clazz) {
     
     if(clazz.isEnum()) {
-      this.setName("<<enum>> : " + clazz.getSimpleName());
+      this.setName("enum : " + clazz.getSimpleName());
       this.setKey(clazz.hashCode());
       
       List<Property> properties = new ArrayList<Property>();

@@ -10,13 +10,15 @@ public enum Relationship {
   public static Relationship toRelationship(Class<?> fromClass, Class<?> toClass) {
     if((!fromClass.equals(toClass)) && toClass.isAssignableFrom(fromClass)) {
       return _generalization;
-    } else {
-      for(Field eaField: toClass.getDeclaredFields()) {
-        if(Property.isAggregateType(fromClass, eaField)) {
-          return _aggregation;
-        }
+    }
+    
+    // Check for aggregation
+    for(Field eaField: toClass.getDeclaredFields()) {
+      if(Property.isAggregateType(fromClass, eaField)) {
+        return _aggregation;
       }
     }
+    
     return _noRel;
   }
   

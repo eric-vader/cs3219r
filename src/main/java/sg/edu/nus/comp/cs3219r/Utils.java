@@ -2,16 +2,19 @@ package sg.edu.nus.comp.cs3219r;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Utils {
   
+  private static boolean isWebapp = false;
   private static ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+  
   private static String appDir = System.getProperty("user.dir");
   
-  public static String resourcesDir = "/src/main/resources/";
+  public static String resourcesDir = "/src/main/webapp/";
   
   // The types of resources avaliable
   public static String markdownBasePath = "markdown/";
@@ -42,7 +45,15 @@ public class Utils {
   }
   
   public static URL sysGetResource(String resourcePath) throws MalformedURLException {
-    return ListenerServlet.context.getResource("/" + resourcePath);
+    if(Utils.isWebapp) {
+      return ListenerServlet.context.getResource("/" + resourcePath);
+    } else {
+      return Paths.get(Utils.getAbsResourcePath(resourcePath)).toUri().toURL();
+    }
+  }
+  
+  public static void setWebapp(boolean isWebapp) {
+    Utils.isWebapp = isWebapp;
   }
   
 }

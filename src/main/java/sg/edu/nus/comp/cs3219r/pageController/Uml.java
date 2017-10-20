@@ -1,4 +1,4 @@
-package sg.edu.nus.comp.cs3219r.page;
+package sg.edu.nus.comp.cs3219r.pageController;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -20,7 +20,6 @@ public class Method {
   private Visibility visibility;
 
   public Method(java.lang.reflect.Method ea_method_java) {
-    // TODO Auto-generated constructor stub
     this.setName(ea_method_java.getName());
     this.setVisibility(toVisibility(ea_method_java.getModifiers()));
 

@@ -1,7 +1,9 @@
 package sg.edu.nus.comp.cs3219r.diagram;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 
@@ -26,7 +28,6 @@ public class Diagram {
         }
       }
     }
-    // We check for every 2 nodes, what is the relation
     
     this.setLinks(links);
     this.setNodes(nodes);

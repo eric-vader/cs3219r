@@ -8,7 +8,7 @@
 	<!-- J2EE goes by matching -->
 	<servlet>
 		<servlet-name>UmlController</servlet-name>
-		<servlet-class>sg.edu.nus.comp.cs3219r.page.UmlController</servlet-class>
+		<servlet-class>sg.edu.nus.comp.cs3219r.pageController.UmlController</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>FrontController</servlet-name>
@@ -17,11 +17,11 @@
 
 	<servlet-mapping>
 		<servlet-name>UmlController</servlet-name>
-		<url-pattern>/uml</url-pattern>
+		<url-pattern>/uml/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>FrontController</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern></url-pattern>
 	</servlet-mapping>
 
 	<listener>

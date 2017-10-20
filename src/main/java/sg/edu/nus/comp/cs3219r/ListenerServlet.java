@@ -11,6 +11,7 @@ public class ListenerServlet implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         context = sce.getServletContext();
+        Utils.setWebapp(true);
     }
 
     @Override

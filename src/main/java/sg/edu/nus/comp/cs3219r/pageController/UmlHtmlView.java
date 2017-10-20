@@ -1,4 +1,4 @@
-package sg.edu.nus.comp.cs3219r.page;
+package sg.edu.nus.comp.cs3219r.pageController;
 
 import sg.edu.nus.comp.cs3219r.template.TemplateHelper;
 
@@ -15,12 +15,12 @@ public class UmlHtmlView {
     this.uml = uml;
     umlHelper = new TemplateHelper("uml");
   }
-  
+
   public String generateHtml() {
-    
+
     this.umlHelper.register(this.uml);
     return this.umlHelper.render();
-    
+
   }
-  
+
 }
