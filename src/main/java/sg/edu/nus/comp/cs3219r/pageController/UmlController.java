@@ -29,7 +29,7 @@ public class UmlController extends HttpServlet {
      Set<String> allowedKeys = new HashSet<>(DiagramDirectory.getKeys());
      if(request.getPathInfo()!=null && allowedKeys.contains(request.getPathInfo().substring(1))) {
        Uml uml = new Uml(request.getPathInfo().substring(1));
-       UmlHtmlView umlView = new UmlHtmlView(uml);
+       UmlHtmlView umlView = new UmlHtmlView(uml, "uml");
        htmlOut = umlView.generateHtml();
      }
      

@@ -1,4 +1,4 @@
-package sg.edu.nus.comp.cs3219r.template;
+package sg.edu.nus.comp.cs3219r.templateView;
 
 import java.io.IOException;
 import java.nio.file.Files;

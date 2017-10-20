@@ -1,4 +1,4 @@
-package sg.edu.nus.comp.cs3219r.template;
+package sg.edu.nus.comp.cs3219r.templateView;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -26,7 +26,7 @@ public class Markdown extends Template {
   public Markdown(String markdownFileName) throws IOException {
     
     key = "markdown:" + markdownFileName;
-    String markdownContents = Utils.resourceToString(Utils.markdownBasePath, markdownFileName);
+    String markdownContents = Utils.resourceToString(Utils.markdownBasePath, markdownFileName + Utils.markdownExtension);
     Parser parser = Parser.builder().build();
     Node document = parser.parse(markdownContents);
     this.value = renderer.render(document);
@@ -40,7 +40,6 @@ public class Markdown extends Template {
 
   @Override
   public String value() {
-
     return value;
   }
 

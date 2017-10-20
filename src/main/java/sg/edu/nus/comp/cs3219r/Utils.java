@@ -23,6 +23,8 @@ public class Utils {
   
   // Extension types
   public static String templateExtension = ".html";
+  public static String htmlExtension = ".html";
+  public static String markdownExtension = ".md";
   public static String umlExtension = ".json";
   
   /**

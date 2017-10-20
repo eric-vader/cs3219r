@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import sg.edu.nus.comp.cs3219r.templateView.History;
+import sg.edu.nus.comp.cs3219r.templateView.Navigation;
+import sg.edu.nus.comp.cs3219r.templateView.TemplateHelper;
+
 /**
  * Markdown Servlet.
  * @author Han Liang Wee, Eric
@@ -19,13 +23,7 @@ public class FrontController extends HttpServlet {
    * 
    */
   private static final long serialVersionUID = 1L;
-  
-  private String message;
 
-  public void init() throws ServletException {
-     // Do required initialization
-     message = "Hello World";
-  }
 
   public void doGet(HttpServletRequest request, HttpServletResponse response)
      throws ServletException, IOException {
@@ -35,7 +33,10 @@ public class FrontController extends HttpServlet {
 
      // Actual logic goes here.
      PrintWriter out = response.getWriter();
-     out.println("<h1>" + message + "</h1>");
+     TemplateHelper helper = new TemplateHelper("tutorial");
+     helper.register(new Navigation());
+     helper.register(new History());
+     out.println(helper.render());
   }
 
   public void destroy() {

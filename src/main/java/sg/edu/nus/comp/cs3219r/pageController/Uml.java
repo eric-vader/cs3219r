@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import sg.edu.nus.comp.cs3219r.Utils;
-import sg.edu.nus.comp.cs3219r.template.Template;
+import sg.edu.nus.comp.cs3219r.templateView.Template;
 
 /**
  * Reads the UML json file from disk.

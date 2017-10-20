@@ -1,4 +1,4 @@
-package sg.edu.nus.comp.cs3219r.template;
+package sg.edu.nus.comp.cs3219r.templateView;
 
 /**
  * A simple Template class with a key and a value. The template helper will
