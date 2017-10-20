@@ -3,18 +3,25 @@ package sg.edu.nus.comp.cs3219r.templateView;
 import java.util.ArrayList;
 import java.util.List;
 
-import sg.edu.nus.comp.cs3219r.transform.TransformableHtmlData;
-import sg.edu.nus.comp.cs3219r.transform.Transformer;
+import sg.edu.nus.comp.cs3219r.transform.HtmlTransformer;
 
-public class History extends Template implements TransformableHtmlData {
-  
-  private List<TransformableHtmlData> records;
-  
+public class History implements Template {
+
+  private List<Event> events;
+
   public History() {
-    this.records = new ArrayList<TransformableHtmlData>();
-    this.records.add(new HistoryRecord(false, "Transform View"));
-    this.records.add(new HistoryRecord(false, "Template View"));
-    this.records.add(new HistoryRecord(true, "Application Controller"));
+    this.events = new ArrayList<Event>();
+    this.events.add(new Event(false, "Transform View"));
+    this.events.add(new Event(false, "Template View"));
+    this.events.add(new Event(true, "Application Controller"));
+  }
+
+  public List<Event> getEvents() {
+    return events;
+  }
+
+  public void setEvents(List<Event> events) {
+    this.events = events;
   }
 
   @Override
@@ -24,22 +31,7 @@ public class History extends Template implements TransformableHtmlData {
 
   @Override
   public String value() {
-    return Transformer.toHtml(this);
-  }
-
-  @Override
-  public String openingTag() {
-    return "<nav class='breadcrumb'>";
-  }
-
-  @Override
-  public String closingTag() {
-    return "</nav>";
-  }
-  
-  @Override
-  public String data() {
-    return TransformableHtmlData.flattenChildren(this.records);
+    return HtmlTransformer.toHtml(this);
   }
 
 }

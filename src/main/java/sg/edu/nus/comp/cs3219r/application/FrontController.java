@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import sg.edu.nus.comp.cs3219r.templateView.CmdDir;
 import sg.edu.nus.comp.cs3219r.templateView.History;
-import sg.edu.nus.comp.cs3219r.templateView.Navigation;
 import sg.edu.nus.comp.cs3219r.templateView.TemplateHelper;
+import sg.edu.nus.comp.cs3219r.transform.HistoryTransformer;
+import sg.edu.nus.comp.cs3219r.transform.CmdDirTransformer;
 
 /**
  * Markdown Servlet.
@@ -34,7 +36,7 @@ public class FrontController extends HttpServlet {
      // Actual logic goes here.
      PrintWriter out = response.getWriter();
      TemplateHelper helper = new TemplateHelper("tutorial");
-     helper.register(new Navigation());
+     helper.register(new CmdDir());
      helper.register(new History());
      out.println(helper.render());
   }

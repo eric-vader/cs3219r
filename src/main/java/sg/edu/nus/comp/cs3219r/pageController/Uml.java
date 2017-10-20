@@ -12,7 +12,7 @@ import sg.edu.nus.comp.cs3219r.templateView.Template;
  * @author Han Liang Wee, Eric
  *
  */
-public class Uml extends Template {
+public class Uml implements Template {
 
   private String json;
   

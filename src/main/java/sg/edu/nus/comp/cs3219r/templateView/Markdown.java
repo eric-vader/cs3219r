@@ -15,7 +15,7 @@ import sg.edu.nus.comp.cs3219r.Utils;
  * @author Han Liang Wee, Eric(A0065517A)
  *
  */
-public class Markdown extends Template {
+public class Markdown implements Template {
   
   // This object is thread safe!!
   private static HtmlRenderer renderer = HtmlRenderer.builder().build();

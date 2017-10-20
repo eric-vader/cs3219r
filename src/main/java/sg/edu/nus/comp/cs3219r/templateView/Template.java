@@ -7,10 +7,10 @@ package sg.edu.nus.comp.cs3219r.templateView;
  * @author Han Liang Wee, Eric(A0065517A)
  *
  */
-public abstract class Template {
+public interface Template {
   
-  abstract public String key();
+  public String key();
 
-  abstract public String value();
+  public String value();
   
 }
