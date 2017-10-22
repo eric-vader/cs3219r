@@ -1,8 +1,9 @@
 package sg.edu.nus.comp.cs3219r.transform;
 
 import sg.edu.nus.comp.cs3219r.command.Command;
+import sg.edu.nus.comp.cs3219r.command.LoginCommand;
 
-@RegisterData(clazz=Command.class)
+@RegisterData(clazz={LoginCommand.class})
 public class CommandTransformer implements HtmlTransformer<Command> {
 
   private Command cmd;
@@ -10,6 +11,11 @@ public class CommandTransformer implements HtmlTransformer<Command> {
   public CommandTransformer(Command cmd) {
     this.cmd = cmd;
   }
+  
+  public CommandTransformer(LoginCommand cmd) {
+    this.cmd = cmd;
+  }
+  
   
   @Override
   public String openingTag() {

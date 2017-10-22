@@ -38,4 +38,8 @@ public class TemplateHelper {
     return replacedHtml;
   }
 
+  public void reset() {
+    templates.clear();
+  }
+  
 }

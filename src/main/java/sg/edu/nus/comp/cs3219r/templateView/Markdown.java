@@ -20,12 +20,10 @@ public class Markdown implements Template {
   // This object is thread safe!!
   private static HtmlRenderer renderer = HtmlRenderer.builder().build();
   
-  private String key;
   private String value;
 
   public Markdown(String markdownFileName) throws IOException {
     
-    key = "markdown:" + markdownFileName;
     String markdownContents = Utils.resourceToString(Utils.markdownBasePath, markdownFileName + Utils.markdownExtension);
     Parser parser = Parser.builder().build();
     Node document = parser.parse(markdownContents);
@@ -35,7 +33,7 @@ public class Markdown implements Template {
   
   @Override
   public String key() {
-    return key;
+    return "markdown";
   }
 
   @Override

@@ -23,3 +23,7 @@ Use it when u like.
 ## Real Application
 
 1. Java Servlets 
+
+## References
+
+1. Patterns Of Enterprise Application Architecture

@@ -9,5 +9,5 @@ import java.lang.annotation.ElementType;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RegisterData {
   
-  Class<?> clazz();
+  Class<?>[] clazz();
 }

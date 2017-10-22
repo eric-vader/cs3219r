@@ -25,11 +25,11 @@ public class GenerateHtml {
 
   public static void main(String[] args) throws IOException {
 
-    Utils.init();
-    
-    TemplateHelper helper = new TemplateHelper("tutorial");
-    helper.register(new CmdDir());
-    System.out.println(helper.render());
+//    Utils.init();
+//    
+//    TemplateHelper helper = new TemplateHelper("tutorial");
+//    helper.register(new CmdDir());
+//    System.out.println(helper.render());
 
     // Collections.sort(registrations,
     // Comparator.<RunAtStartupData>comparingInt(x -> x.priority).reversed());

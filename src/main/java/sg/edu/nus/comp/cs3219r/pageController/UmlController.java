@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import sg.edu.nus.comp.cs3219r.AppDesignPlane;
+import sg.edu.nus.comp.cs3219r.Utils;
+import sg.edu.nus.comp.cs3219r.command.AppView;
 import sg.edu.nus.comp.cs3219r.diagram.DiagramDirectory;
 
 public class UmlController extends HttpServlet {
@@ -26,8 +29,11 @@ public class UmlController extends HttpServlet {
      response.setContentType("text/html");
      
      String htmlOut = "";
-     Set<String> allowedKeys = new HashSet<>(DiagramDirectory.getKeys());
-     if(request.getPathInfo()!=null && allowedKeys.contains(request.getPathInfo().substring(1))) {
+     Set<String> allowedIds = new HashSet<>();
+     for(AppDesignPlane eaAppPlane:Utils.listAppViews()) {
+       allowedIds.add(eaAppPlane.getId());
+     }
+     if(request.getPathInfo()!=null && allowedIds.contains(request.getPathInfo().substring(1))) {
        Uml uml = new Uml(request.getPathInfo().substring(1));
        UmlHtmlView umlView = new UmlHtmlView(uml, "uml");
        htmlOut = umlView.generateHtml();

@@ -13,6 +13,17 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
 
+import sg.edu.nus.comp.cs3219r.diagram.Diagram;
+import sg.edu.nus.comp.cs3219r.diagram.Link;
+import sg.edu.nus.comp.cs3219r.diagram.Method;
+import sg.edu.nus.comp.cs3219r.diagram.Node;
+import sg.edu.nus.comp.cs3219r.diagram.Parameter;
+import sg.edu.nus.comp.cs3219r.diagram.Property;
+import sg.edu.nus.comp.cs3219r.diagram.Relationship;
+import sg.edu.nus.comp.cs3219r.diagram.Visibility;
+import sg.edu.nus.comp.cs3219r.pageController.Uml;
+import sg.edu.nus.comp.cs3219r.pageController.UmlController;
+import sg.edu.nus.comp.cs3219r.pageController.UmlHtmlView;
 import sg.edu.nus.comp.cs3219r.transform.HtmlTransformer;
 import sg.edu.nus.comp.cs3219r.transform.RegisterData;
 
@@ -125,6 +136,16 @@ public class Utils {
     } catch (IOException ioe) {
       ioe.printStackTrace();
     }
+  }
+
+  public static List<AppDesignPlane> listAppViews() {
+    List<AppDesignPlane> l = new ArrayList<>();
+    l.add(new AppDesignPlane("pageController", Uml.class, UmlController.class,
+        UmlHtmlView.class));
+    l.add(new AppDesignPlane("uml", Diagram.class, Link.class, Method.class,
+        Node.class, Parameter.class, Property.class, Relationship.class,
+        Visibility.class));
+    return l;
   }
 
 }

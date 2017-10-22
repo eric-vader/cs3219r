@@ -7,19 +7,21 @@ import java.util.List;
 public interface HtmlTransformer<T> {
 
   static HashMap<Class<?>, Class<?>> registry = new HashMap<>();
-  
+
   public static void register(Class<?> dataClazz, Class<?> transformerClazz) {
     registry.put(dataClazz, transformerClazz);
   }
-  
+
   public static <T> HtmlTransformer<T> initTransformer(T obj) {
 
     try {
-    Class<?> transformerClass = registry.get(obj.getClass());
-    HtmlTransformer<T> transformer = (HtmlTransformer<T>) transformerClass.getDeclaredConstructor(obj.getClass()).newInstance(obj);
-    return transformer;
-    //dataClazz.newInstance();
-    } catch( InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+      Class<?> transformerClass = registry.get(obj.getClass());
+      HtmlTransformer<T> transformer = (HtmlTransformer<T>) transformerClass
+          .getDeclaredConstructor(obj.getClass()).newInstance(obj);
+      return transformer;
+    } catch (InstantiationException | IllegalAccessException
+        | IllegalArgumentException | InvocationTargetException
+        | NoSuchMethodException | SecurityException e) {
       e.printStackTrace();
       return null;
     }
@@ -39,8 +41,9 @@ public interface HtmlTransformer<T> {
     }
     return childrenHtml;
   }
-  
+
   public static <T> String toHtml(T obj) {
+    System.out.println(HtmlTransformer.initTransformer(obj));
     HtmlTransformer<T> e = HtmlTransformer.initTransformer(obj);
     return e.openingTag() + e.data() + e.closingTag();
   }
@@ -51,5 +54,5 @@ public interface HtmlTransformer<T> {
 
   public String data();
 
-  
+
 }

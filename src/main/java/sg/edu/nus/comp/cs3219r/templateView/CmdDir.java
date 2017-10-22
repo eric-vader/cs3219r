@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sg.edu.nus.comp.cs3219r.command.Command;
+import sg.edu.nus.comp.cs3219r.command.LoginCommand;
 import sg.edu.nus.comp.cs3219r.transform.HtmlTransformer;
 
 public class CmdDir implements Template {
@@ -11,12 +12,12 @@ public class CmdDir implements Template {
   private String dirName;
   private List<Command> commands;
   
-  public CmdDir() {
-    this.dirName = "CS3219R Tutorial";
+  public CmdDir(String dirName) {
+    this.dirName = dirName;
     this.commands = new ArrayList<Command>();
-    this.commands.add(new Command("Cmd1"));
-    this.commands.add(new Command("Cmd2"));
-    this.commands.add(new Command("Cmd3"));
+    this.commands.add(new LoginCommand());
+//    this.commands.add(new Command("Cmd2"));
+//    this.commands.add(new Command("Cmd3"));
   }
   
   public String getDirName() {
@@ -26,8 +27,6 @@ public class CmdDir implements Template {
   public void setDirName(String dirName) {
     this.dirName = dirName;
   }
-
-  
   
   public List<Command> getCommands() {
     return commands;
