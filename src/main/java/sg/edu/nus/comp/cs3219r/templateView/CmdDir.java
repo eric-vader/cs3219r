@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sg.edu.nus.comp.cs3219r.command.Command;
+import sg.edu.nus.comp.cs3219r.command.GotoCommand;
 import sg.edu.nus.comp.cs3219r.command.LoginCommand;
 import sg.edu.nus.comp.cs3219r.transform.HtmlTransformer;
 
@@ -16,6 +17,7 @@ public class CmdDir implements Template {
     this.dirName = dirName;
     this.commands = new ArrayList<Command>();
     this.commands.add(new LoginCommand());
+    this.commands.add(new GotoCommand());
 //    this.commands.add(new Command("Cmd2"));
 //    this.commands.add(new Command("Cmd3"));
   }

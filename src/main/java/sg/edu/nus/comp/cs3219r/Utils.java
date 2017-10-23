@@ -131,7 +131,9 @@ public class Utils {
         if (register == null)
           continue;
 
-        HtmlTransformer.register(register.clazz(), clazz);
+        for(Class<?> eaTargetClass : register.clazz()) {
+          HtmlTransformer.register(eaTargetClass, clazz);
+        }
       }
     } catch (IOException ioe) {
       ioe.printStackTrace();

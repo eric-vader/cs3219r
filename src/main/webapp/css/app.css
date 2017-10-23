@@ -35,3 +35,9 @@ color: #f39c12;
      -moz-transition-duration: 0.5s;
      -o-transition-duration: 0.5s;
  }
+
+#login-dp{
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+}
