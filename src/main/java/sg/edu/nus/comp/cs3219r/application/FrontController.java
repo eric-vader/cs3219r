@@ -12,11 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import sg.edu.nus.comp.cs3219r.command.Command;
 import sg.edu.nus.comp.cs3219r.templateView.CmdDir;
-import sg.edu.nus.comp.cs3219r.templateView.History;
 import sg.edu.nus.comp.cs3219r.templateView.Markdown;
 import sg.edu.nus.comp.cs3219r.templateView.TemplateHelper;
 import sg.edu.nus.comp.cs3219r.templateView.Title;
-import sg.edu.nus.comp.cs3219r.transform.HistoryTransformer;
 import sg.edu.nus.comp.cs3219r.transform.CmdDirTransformer;
 
 /**

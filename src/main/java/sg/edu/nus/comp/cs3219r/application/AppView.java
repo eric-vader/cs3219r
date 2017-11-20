@@ -23,7 +23,6 @@ public class AppView implements Observer {
 
 		helper.reset();
 		helper.register(state.getCmdDir());
-		helper.register(state.getHistory());
 		helper.register(state.getMarkdown());
 		helper.register(state.getTitle());
 		this.htmlPage = helper.render();

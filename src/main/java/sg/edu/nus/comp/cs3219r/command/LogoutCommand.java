@@ -14,6 +14,8 @@ public class LogoutCommand extends Command {
     state.getCmdDir().get("login").setHidden(false);
     state.getCmdDir().get("goto").setHidden(true);
     this.setHidden(true);
+    state.getCmdDir().get("next").setHidden(true);
+    state.getCmdDir().get("prev").setHidden(true);
     state.getMarkdown().update("home");
   }
 

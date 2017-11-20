@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.regex.Matcher;
 
 import sg.edu.nus.comp.cs3219r.Utils;
 
@@ -36,7 +37,8 @@ public class TemplateHelper {
 	public String render() {
 		String replacedHtml = htmlFile;
 		for (Template eaTemplate : templates.values()) {
-			replacedHtml = replacedHtml.replaceAll("\\{\\{" + eaTemplate.key() + "\\}\\}", eaTemplate.value());
+			replacedHtml = replacedHtml.replaceAll("\\{\\{" + eaTemplate.key() + "\\}\\}",
+					Matcher.quoteReplacement(eaTemplate.value()));
 		}
 		return replacedHtml;
 	}

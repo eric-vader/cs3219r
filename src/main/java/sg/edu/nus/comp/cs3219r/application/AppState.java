@@ -7,7 +7,6 @@ import java.util.Observable;
 
 import sg.edu.nus.comp.cs3219r.Utils;
 import sg.edu.nus.comp.cs3219r.templateView.CmdDir;
-import sg.edu.nus.comp.cs3219r.templateView.History;
 import sg.edu.nus.comp.cs3219r.templateView.Markdown;
 import sg.edu.nus.comp.cs3219r.templateView.Template;
 import sg.edu.nus.comp.cs3219r.templateView.TemplateHelper;
@@ -23,13 +22,11 @@ import sg.edu.nus.comp.cs3219r.templateView.Title;
 public class AppState extends Observable {
 
 	private CmdDir cmdDir;
-	private History history;
 	private Markdown markdown;
 	private Title title;
 
 	public AppState(String appName) throws IOException {
 		this.cmdDir = new CmdDir(appName);
-		this.history = new History();
 		this.markdown = new Markdown(Utils.markdownIds());
 		this.title = new Title(appName);
 		this.setChanged();
@@ -38,11 +35,6 @@ public class AppState extends Observable {
 	public CmdDir getCmdDir() {
 		this.setChanged();
 		return cmdDir;
-	}
-
-	public History getHistory() {
-		this.setChanged();
-		return history;
 	}
 
 	public Markdown getMarkdown() {

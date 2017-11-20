@@ -7,7 +7,7 @@ public class GotoCommand extends Command {
 
 	public GotoCommand() {
 		super("Skip", "goto", "page");
-		this.setHidden(false);
+		this.setHidden(true);
 		for(String mId : Utils.markdownIds()) {
 			this.addOption(Utils.markdownDisplayNames().get(mId), "page", mId);
 		}
