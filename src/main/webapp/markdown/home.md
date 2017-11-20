@@ -1,5 +1,8 @@
 # Welcome to CS3219's Patterns Demostration! 
 
+Accompanying Module: NUS CS3219 Software Engineering Principles & Patterns
+Author: Han Liang Wee, Eric
+
 In this demo, we will demostrate the following patterns, by building a web application framework from scratch:
 
 1. Application Controller
@@ -8,24 +11,53 @@ In this demo, we will demostrate the following patterns, by building a web appli
 1. Template View
 1. Transformer
 
+The objective of this repository is to aid learning of software patterns through an interactive, interesting manner. The motivation of this project came from the lack of modern examples of patterns in teaching materials. The author has learnt much from implementing these patterns and hope that you will too by exploring this repository and even extending it.
+
 We have used the aforementioned patterns in our implementation of this web application framework. In addition, to make learning interactive we have designed a tutorial using our web application fraomework and used the web application to document itself!
 
 The tutorial web application consists of several pages. The first page is the home page and it will give a high level documentation of the design of our framework. In the subsequent pages, we will document each of the pattern(s) in the subsequent pages. In each of the pages, we will discuss the pattern, any relevant historical notes about the pattern, show and discuss our implementation(with UML diagram), some real life application that uses the pattern and lastly any textbook references to the pattern.
 
 ## ReadMe
 
-In this section, we will provide some details on how to execute our web application:
+We have packed the webapp with an embedded webserver plugin in maven. The <diagram> below shows the build process in our project. Maven will pack the code into a WAR file and then by running the [Jetty Maven Plugin](https://www.eclipse.org/jetty/documentation/9.4.x/jetty-maven-plugin.html), we are able to 'deploy' our WAR file into a temporary webserver([Jetty](https://www.eclipse.org/jetty/)). 
 
 1. Ensure that all the required dependencies(Java and Maven) are installed on your machine
 1. Navigate to the web application's root directory and simply execute `mvn jetty:run`. Maven will download all the required software dependencies and start the web application using Jetty as the web server.
-1. Navigate to [http://0.0.0.0:8080/](http://0.0.0.0:8080/) and you should see the home page!
+1. Navigate to [http://0.0.0.0:8080/](http://0.0.0.0:8080/) and you should see the home page! If you can see the page, then congratulations! You have successfully run a webserver!
+
+```
+[INFO] --- jetty-maven-plugin:9.4.7.v20170914:run (default-cli) @ software-patterns-example ---
+[INFO] Configuring Jetty for project: software-patterns-example Webapp
+[INFO] webAppSourceDirectory not set. Trying src/main/webapp
+[INFO] Reload Mechanic: automatic
+[INFO] nonBlocking:false
+[INFO] Classes = /home/Eric_Vader/workspace/cs3219r/target/classes
+[INFO] Logging initialized @2499ms to org.eclipse.jetty.util.log.Slf4jLog
+[INFO] Context path = /
+[INFO] Tmp directory = /home/Eric_Vader/workspace/cs3219r/target/tmp
+[INFO] Web defaults = org/eclipse/jetty/webapp/webdefault.xml
+[INFO] Web overrides =  none
+[INFO] web.xml file = file:///home/Eric_Vader/workspace/cs3219r/src/main/webapp/WEB-INF/web.xml
+[INFO] Webapp directory = /home/Eric_Vader/workspace/cs3219r/src/main/webapp
+[INFO] jetty-9.4.7.v20170914
+[INFO] Scanning elapsed time=83ms
+[INFO] DefaultSessionIdManager workerName=node0
+[INFO] No SessionScavenger set, using defaults
+[INFO] Scavenging every 660000ms
+[INFO] Started o.e.j.m.p.JettyWebAppContext@460b6d54{/,file:///home/Eric_Vader/workspace/cs3219r/src/main/webapp/,AVAILABLE}{file:///home/Eric_Vader/workspace/cs3219r/src/main/webapp/}
+[INFO] Started ServerConnector@2e388f7b{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+[INFO] Started @3594ms
+[INFO] Started Jetty Server
+```
 
 ### Software Dependencies
 
-Please ensure that the following is installed on your machine:
+We have packaged the web application using maven and it also relies on Java. A summary of the software tools this application depend on and their respective versions are listed below:
 
-1. Maven 3.3.9
-1. Java/Javac OpenJDK 1.8.0_151
+ * Apache Maven 3.3.9: [Install Maven](https://maven.apache.org/install.html)
+ * javac 1.8.0\_144: [Install Java](https://www.java.com/en/download/help/download_options.xml)
+
+Detailed instructions on how to install the respective tools are given in the links above. To install these tools on [Fedora Linux](https://getfedora.org/en/workstation/download/), is simply `# dnf install maven`
 
 #### Maven Dependencies
 
