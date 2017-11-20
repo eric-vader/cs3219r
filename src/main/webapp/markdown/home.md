@@ -96,9 +96,41 @@ We have used several Html/Javascript/Css libraries to hasten development. These 
 
 The dependencies are already packaged into the web application and there is no need to install them.
 
+## Web Application Architecture
+
+In our framework and tutorial application, we have 3 independent parts as shown below. We can implement a web application using 2 different mechanisms, either page controller or application controller. In our implementation, page controller is used primariliy for resources that does not have state. application controller is used for applications that will require state management.
+
+1. Standalone:
+	1. UML Generator - Generates the UML diagram from code.
+1. Web Applications:
+	1. UML App - Shows the UML diagrams
+	1. Tutorial App - Self-documenting the patterns used
+	
+### UML Generator
+
+The code related to this component is located in the package `sg.edu.nus.comp.cs3219r.diagram`. We have designed a framework to read Java source code using Java Generics to produce UML diagrams. The motivation for this is that we want the web application to be a self-documenting tool for learning patterns. With that in mind, we want to allow users to modify code(pokeing around some patterns) and observe the effects of the code. We have designed the generation to be recursive and in levels:
+
+1. `Diagram.java`: Starting point to parse a bunch of classes.
+1. `Node.java`: Representing a class.
+	1. `Method.java`: Generate the UML's methods
+	1. `Parameter.java`: 
+	1. `Property.java`
+	1. `Visibility.java`
+1. `Link.java`: Representing class relationship.
+	1. `Relationship.java`
+
+Utils.java DiagramDirectory.java
+
 ## Web Application Structure
 
-The web application framework is built ontop of JavaEE version 3.0. In this section, we will discuss how our web application is organized. Our framework is JavaEE 3.0 compliant, so the folder structure will follow JavaEE specifications. In addition, we used maven to manage our dependencies and we will also follow the Maven conventions for folder sturcture. The web application is found 
+The web application framework is built ontop of JavaEE version 3.0. In this section, we will discuss how our web application is organized. Our framework is JavaEE 3.0 compliant, so the folder structure will follow JavaEE specifications. In addition, we used maven to manage our dependencies and we will also follow the Maven conventions for folder sturcture. The web application is found at the path `/src/main/webapp`. We have adopted a typical web application structure:
+
+1. `css`: Stores all the web application's CSS files
+1. `js`: Stores all the JS files
+1. `markdown`: Markdown files, each file signify a page
+1. `templates`: Templates for the webapplication
+1. `uml`: Statically generated uml json
+1. `WEB-INF`: J2EE specifications
 
 ```bash
 .
@@ -122,7 +154,6 @@ The web application framework is built ontop of JavaEE version 3.0. In this sect
 │   └── transform.md
 ├── templates
 │   ├── tutorial.html
-│   ├── ...
 │   └── uml.html
 ├── uml
 │   ├── pageController.json
@@ -131,9 +162,6 @@ The web application framework is built ontop of JavaEE version 3.0. In this sect
 └── WEB-INF
     └── web.xml
 ```
-
-## Web Application Architecture
-
 
 ## Code Structure
 
