@@ -22,7 +22,7 @@ public class DiagramDirectory {
     lookup = new HashMap<String, Diagram>();
     outputDir = Utils.getAbsResourcePath(Utils.umlBasePath);
 
-    for(AppDesignPlane eaView : Utils.listAppViews()) {
+    for(AppDesignPlane eaView : Utils.listAppPlanes()) {
       if(eaView.getDiagram()!=null) 
         lookup.put(eaView.getId(), eaView.getDiagram());
     }

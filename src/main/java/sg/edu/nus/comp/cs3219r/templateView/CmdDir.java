@@ -10,6 +10,8 @@ import sg.edu.nus.comp.cs3219r.command.Command;
 import sg.edu.nus.comp.cs3219r.command.GotoCommand;
 import sg.edu.nus.comp.cs3219r.command.LoginCommand;
 import sg.edu.nus.comp.cs3219r.command.LogoutCommand;
+import sg.edu.nus.comp.cs3219r.command.NextCommand;
+import sg.edu.nus.comp.cs3219r.command.PrevCommand;
 import sg.edu.nus.comp.cs3219r.transform.HtmlTransformer;
 
 public class CmdDir implements Template {
@@ -23,6 +25,8 @@ public class CmdDir implements Template {
 		this.add(new LoginCommand());
 		this.add(new GotoCommand());
 		this.add(new LogoutCommand());
+		this.add(new NextCommand());
+		this.add(new PrevCommand());
 	}
 
 	private void add(Command cmd) {

@@ -19,7 +19,7 @@ public class ApplicationController {
 	private AppView view;
 	
 	public ApplicationController() throws IOException {
-		this.state = new AppState("home", "Patterns Demo");
+		this.state = new AppState("Patterns Demo");
 		this.view = new AppView("tutorial");
 		this.state.addObserver(this.view);
 		this.state.notifyObservers();

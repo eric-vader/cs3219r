@@ -11,7 +11,9 @@ import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import sg.edu.nus.comp.cs3219r.diagram.Diagram;
 import sg.edu.nus.comp.cs3219r.diagram.Link;
@@ -140,14 +142,31 @@ public class Utils {
     }
   }
 
-  public static List<AppDesignPlane> listAppViews() {
+  public static List<AppDesignPlane> listAppPlanes() {
     List<AppDesignPlane> l = new ArrayList<>();
     l.add(new AppDesignPlane("pageController", Uml.class, UmlController.class,
         UmlHtmlView.class));
     l.add(new AppDesignPlane("uml", Diagram.class, Link.class, Method.class,
         Node.class, Parameter.class, Property.class, Relationship.class,
         Visibility.class));
+    
     return l;
   }
 
+  // This is the sequence of Markdown to be displayed, in the particular order
+  public static String[] markdownIds() {
+	  return new String[] {"home", "pageController", "appController", "command", "templateView", "transform"};
+  }
+  
+  public static Map<String,String> markdownDisplayNames() {
+	  Map<String, String> namesLookup = new HashMap<String, String>();
+	  namesLookup.put("home", "Home");
+	  namesLookup.put("appController", "Application Controller");
+	  namesLookup.put("command", "Command Pattern");
+	  namesLookup.put("pageController", "Page Controller");
+	  namesLookup.put("templateView", "Template View");
+	  namesLookup.put("transform", "Transform Pattern");
+	  return namesLookup;
+  }
+  
 }

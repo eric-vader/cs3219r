@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import sg.edu.nus.comp.cs3219r.Utils;
 import sg.edu.nus.comp.cs3219r.templateView.CmdDir;
 import sg.edu.nus.comp.cs3219r.templateView.History;
 import sg.edu.nus.comp.cs3219r.templateView.Markdown;
@@ -26,10 +27,10 @@ public class AppState extends Observable {
 	private Markdown markdown;
 	private Title title;
 
-	public AppState(String homeMd, String appName) throws IOException {
+	public AppState(String appName) throws IOException {
 		this.cmdDir = new CmdDir(appName);
 		this.history = new History();
-		this.markdown = new Markdown(homeMd);
+		this.markdown = new Markdown(Utils.markdownIds());
 		this.title = new Title(appName);
 		this.setChanged();
 	}

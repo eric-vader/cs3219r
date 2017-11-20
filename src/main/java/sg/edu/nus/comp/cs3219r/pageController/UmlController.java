@@ -30,7 +30,7 @@ public class UmlController extends HttpServlet {
      
      String htmlOut = "";
      Set<String> allowedIds = new HashSet<>();
-     for(AppDesignPlane eaAppPlane:Utils.listAppViews()) {
+     for(AppDesignPlane eaAppPlane:Utils.listAppPlanes()) {
        allowedIds.add(eaAppPlane.getId());
      }
      if(request.getPathInfo()!=null && allowedIds.contains(request.getPathInfo().substring(1))) {

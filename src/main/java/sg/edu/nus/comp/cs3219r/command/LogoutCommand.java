@@ -5,7 +5,7 @@ import sg.edu.nus.comp.cs3219r.application.AppState;
 public class LogoutCommand extends Command {
 
   public LogoutCommand() {
-    super("Logout", "logout", "hello");
+    super("Logout", "logout");
     this.setHidden(true);
   }
 
@@ -14,6 +14,7 @@ public class LogoutCommand extends Command {
     state.getCmdDir().get("login").setHidden(false);
     state.getCmdDir().get("goto").setHidden(true);
     this.setHidden(true);
+    state.getMarkdown().update("home");
   }
 
 }
