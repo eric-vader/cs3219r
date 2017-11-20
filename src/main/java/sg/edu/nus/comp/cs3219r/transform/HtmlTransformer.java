@@ -43,7 +43,6 @@ public interface HtmlTransformer<T> {
   }
 
   public static <T> String toHtml(T obj) {
-    System.out.println(HtmlTransformer.initTransformer(obj));
     HtmlTransformer<T> e = HtmlTransformer.initTransformer(obj);
     return e.openingTag() + e.data() + e.closingTag();
   }

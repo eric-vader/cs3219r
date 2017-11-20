@@ -9,7 +9,6 @@ public class Utils {
     if(Collection.class.isAssignableFrom(clazz)) {
       ParameterizedType integerListType = (ParameterizedType) clazz.getGenericSuperclass();
       Class<?> typeClass = (Class<?>) integerListType.getActualTypeArguments()[0];
-      System.out.println(typeClass.getSimpleName());
       return typeClass.getSimpleName();
     } else {
       return clazz.getSimpleName();

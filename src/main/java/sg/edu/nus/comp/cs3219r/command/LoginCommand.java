@@ -10,7 +10,6 @@ public class LoginCommand extends Command {
 
 	@Override
 	public void execute(AppState state, String... parameters) {
-		System.out.println("Login!");
 		state.getCmdDir().get("goto").setHidden(false);
 		state.getCmdDir().get("next").setHidden(!state.getMarkdown().is_next());
 		state.getCmdDir().get("prev").setHidden(!state.getMarkdown().is_prev());
