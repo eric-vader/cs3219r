@@ -119,7 +119,21 @@ The code related to this component is located in the package `sg.edu.nus.comp.cs
 1. `Link.java`: Representing class relationship.
 	1. `Relationship.java`
 
-Utils.java DiagramDirectory.java
+The rest of the 2 codes are `Utils.java` and `DiagramDirectory.java` which provide for some utlity function for the UML generation. The UML generation generates the UML diagrams from code and exports it to the directory `/src/main/webapp/uml/` as json files. The json files will be used by the UML App to be displayed to the end-user.
+
+### UML App
+
+The json files will be used by the UML application to display the UML diagrams to the user. The json files contain descriptors that will be used by the `go.js` charting library to draw the UML diagram. We had modified their code example to draw a nice UML diagram. This part of the application will use the front controller exclusively, which will also use the Template pattern to replace the json from the disk to plot the correct one based on the parameter from the path. An example of the UML diagram generated is at the path [http://0.0.0.0:8080/uml/pageController](http://0.0.0.0:8080/uml/pageController).
+
+![alt text](img/uml.png)
+
+### Tutorial App
+
+The tutorial application is the self-documenting application that is most interesting. The app is designed using the application controller pattern. Each action that the user performs will trigger a command on the application and that will be processed by the application controller. The command will perform actions on application state and when the application state has been updated then the view will be updated if necessary(Observer pattern). The view is processed using both template view and transformer and the output will be sent to the JavaEE servlet. 
+
+There are 6 pages, one for each pattern and the last one is the home page. This is the home page that will give a brief description of the high level description. An example screenshot is given below. Explore the application by logging in and issue the commands on the nav bar.
+
+![alt text](img/tutorial.png)
 
 ## Web Application Structure
 
@@ -163,6 +177,7 @@ The web application framework is built ontop of JavaEE version 3.0. In this sect
     └── web.xml
 ```
 
-## Code Structure
-
 ## Further Work
+
+There is much further work to be done with the application. For starters, the UML generation is not complete. The UML generation is missing the part that scans dependencies between classes. The current generator cannot draw a line if 1 object make a call to another. In the UML diagram defintion, there would be a line drawn between them. Secondly, more patterns can be added. We wanted to implement history using the momento pattern, we think that that will provide a meaningful and interesting learning experience.
+
