@@ -13,39 +13,45 @@ import sg.edu.nus.comp.cs3219r.templateView.TemplateHelper;
 import sg.edu.nus.comp.cs3219r.templateView.Title;
 
 /**
- * State of the application
- * @author 
+ * State of the application, will be saved through the momento pattern as
+ * commands execute on it.
+ * 
+ * @author
  *
  */
 public class AppState extends Observable {
-  
-  private CmdDir cmdDir;
-  private History history;
-  private Markdown markdown;
-  private Title title;
 
-  public AppState(String homeMd, String appName) throws IOException {
-    this.cmdDir = new CmdDir(appName);
-    this.history = new History();
-    this.markdown = new Markdown(homeMd);
-    this.title = new Title(appName);
-    this.setChanged();
-  }
+	private CmdDir cmdDir;
+	private History history;
+	private Markdown markdown;
+	private Title title;
 
-  public CmdDir getCmdDir() {
-    return cmdDir;
-  }
+	public AppState(String homeMd, String appName) throws IOException {
+		this.cmdDir = new CmdDir(appName);
+		this.history = new History();
+		this.markdown = new Markdown(homeMd);
+		this.title = new Title(appName);
+		this.setChanged();
+	}
 
-  public History getHistory() {
-    return history;
-  }
+	public CmdDir getCmdDir() {
+		this.setChanged();
+		return cmdDir;
+	}
 
-  public Markdown getMarkdown() {
-    return markdown;
-  }
+	public History getHistory() {
+		this.setChanged();
+		return history;
+	}
 
-  public Title getTitle() {
-    return title;
-  }
-  
+	public Markdown getMarkdown() {
+		this.setChanged();
+		return markdown;
+	}
+
+	public Title getTitle() {
+		this.setChanged();
+		return title;
+	}
+
 }

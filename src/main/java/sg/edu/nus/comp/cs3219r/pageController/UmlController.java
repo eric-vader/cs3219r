@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import sg.edu.nus.comp.cs3219r.AppDesignPlane;
 import sg.edu.nus.comp.cs3219r.Utils;
-import sg.edu.nus.comp.cs3219r.command.AppView;
+import sg.edu.nus.comp.cs3219r.application.AppView;
 import sg.edu.nus.comp.cs3219r.diagram.DiagramDirectory;
 
 public class UmlController extends HttpServlet {

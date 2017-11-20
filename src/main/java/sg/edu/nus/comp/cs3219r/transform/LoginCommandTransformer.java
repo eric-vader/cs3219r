@@ -26,7 +26,7 @@ public class LoginCommandTransformer implements HtmlTransformer<Command> {
         "        <li>\n" +
         "            <form class='form' role='form' method='get' action='/' accept-charset='UTF-8' id='login-nav'>\n" + 
         "                <div class='form-group'>\n" +  
-        "                    <input type='text' class='form-control' name='param' placeholder='Name ie. Carissa' required>\n" +
+        "                    <input type='text' class='form-control' name='name' placeholder='Name ie. Carissa' required>\n" +
         "                    <input type='hidden' class='form-control' name='cmd' value='login' required>\n" +
         "                </div>\n" + 
         "                <div class='form-group'>\n" + 

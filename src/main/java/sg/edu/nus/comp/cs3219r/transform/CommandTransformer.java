@@ -3,8 +3,9 @@ package sg.edu.nus.comp.cs3219r.transform;
 import sg.edu.nus.comp.cs3219r.command.Command;
 import sg.edu.nus.comp.cs3219r.command.GotoCommand;
 import sg.edu.nus.comp.cs3219r.command.LoginCommand;
+import sg.edu.nus.comp.cs3219r.command.LogoutCommand;
 
-@RegisterData(clazz={GotoCommand.class})
+@RegisterData(clazz={LogoutCommand.class})
 public class CommandTransformer implements HtmlTransformer<Command> {
 
   private Command cmd;
@@ -14,9 +15,9 @@ public class CommandTransformer implements HtmlTransformer<Command> {
     this.cmd = cmd;
   }
   
-  public CommandTransformer(GotoCommand cmd) {
+  public CommandTransformer(LogoutCommand cmd) {
     this.cmd = cmd;
-    childHtml = String.format("<a class='nav-link' href='?cmd=goto&param=%s'>", cmd.getAvaliableParameters().get(0));
+    childHtml = "<a class='nav-link' href='?cmd=logout'>";
   }
   
   @Override
