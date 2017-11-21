@@ -15,6 +15,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import sg.edu.nus.comp.cs3219r.application.AppState;
+import sg.edu.nus.comp.cs3219r.application.AppView;
+import sg.edu.nus.comp.cs3219r.application.ApplicationController;
+import sg.edu.nus.comp.cs3219r.application.FrontController;
+import sg.edu.nus.comp.cs3219r.command.Command;
 import sg.edu.nus.comp.cs3219r.diagram.Diagram;
 import sg.edu.nus.comp.cs3219r.diagram.Link;
 import sg.edu.nus.comp.cs3219r.diagram.Method;
@@ -149,7 +154,7 @@ public class Utils {
     l.add(new AppDesignPlane("uml", Diagram.class, Link.class, Method.class,
         Node.class, Parameter.class, Property.class, Relationship.class,
         Visibility.class));
-    
+    l.add(new AppDesignPlane("appController", ApplicationController.class, FrontController.class, Command.class, AppState.class, AppView.class));
     return l;
   }
 
