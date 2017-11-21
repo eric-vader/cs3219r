@@ -60,3 +60,4 @@ There are countless applications, one of the popular ones are:
 
 1. Patterns Of Enterprise Application Architecture: Page 350
 1. [Martin Fowler](https://martinfowler.com/eaaCatalog/templateView.html)
+1. Pattern-Oriented Software Architecture: page 346

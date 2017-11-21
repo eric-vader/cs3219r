@@ -51,6 +51,7 @@ We also note that we can implement this pattern using page controller without pr
 1. Patterns Of Enterprise Application Architecture: 
 	1. Front Controller: Page 344
 	1. Application Controller: Page 379
+1. Pattern-Oriented Software Architecture: page 339 for front controller, application controller will follow after the chapter
 1. Martin Fowlder:
 	1. [Front Controller](https://martinfowler.com/eaaCatalog/frontController.html)
 	1. [Application Controller](https://martinfowler.com/eaaCatalog/applicationController.html)

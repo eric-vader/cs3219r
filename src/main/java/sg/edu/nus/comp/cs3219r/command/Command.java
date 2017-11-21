@@ -11,7 +11,7 @@ import java.util.Map.Entry;
 import javax.servlet.http.HttpServletRequest;
 
 import sg.edu.nus.comp.cs3219r.application.AppState;
-import sg.edu.nus.comp.cs3219r.templateView.CmdOption;
+import sg.edu.nus.comp.cs3219r.transform.CmdOption;
 
 public abstract class Command {
 

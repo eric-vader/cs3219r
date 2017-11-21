@@ -3,7 +3,6 @@ package sg.edu.nus.comp.cs3219r.transform;
 import java.util.List;
 
 import sg.edu.nus.comp.cs3219r.templateView.CmdDir;
-import sg.edu.nus.comp.cs3219r.templateView.CmdOption;
 import sg.edu.nus.comp.cs3219r.templateView.Template;
 
 @RegisterData(clazz = CmdOption.class)

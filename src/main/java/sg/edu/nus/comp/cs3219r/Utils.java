@@ -37,12 +37,17 @@ import sg.edu.nus.comp.cs3219r.pageController.Uml;
 import sg.edu.nus.comp.cs3219r.pageController.UmlController;
 import sg.edu.nus.comp.cs3219r.pageController.UmlHtmlView;
 import sg.edu.nus.comp.cs3219r.templateView.CmdDir;
-import sg.edu.nus.comp.cs3219r.templateView.CmdOption;
 import sg.edu.nus.comp.cs3219r.templateView.Markdown;
 import sg.edu.nus.comp.cs3219r.templateView.Template;
 import sg.edu.nus.comp.cs3219r.templateView.TemplateHelper;
 import sg.edu.nus.comp.cs3219r.templateView.Title;
+import sg.edu.nus.comp.cs3219r.transform.CmdDirTransformer;
+import sg.edu.nus.comp.cs3219r.transform.CmdOption;
+import sg.edu.nus.comp.cs3219r.transform.CmdOptionTransformer;
+import sg.edu.nus.comp.cs3219r.transform.CommandParamTransformer;
+import sg.edu.nus.comp.cs3219r.transform.CommandTransformer;
 import sg.edu.nus.comp.cs3219r.transform.HtmlTransformer;
+import sg.edu.nus.comp.cs3219r.transform.LoginCommandTransformer;
 import sg.edu.nus.comp.cs3219r.transform.RegisterData;
 
 public class Utils {
@@ -168,6 +173,7 @@ public class Utils {
     l.add(new AppDesignPlane("appController", ApplicationController.class, FrontController.class, Command.class, AppState.class, AppView.class));
     l.add(new AppDesignPlane("command", Command.class, GotoCommand.class, LoginCommand.class, LogoutCommand.class, NextCommand.class, PrevCommand.class, ApplicationController.class));
     l.add(new AppDesignPlane("templateView", CmdDir.class, Markdown.class, Template.class, TemplateHelper.class, Title.class));
+    l.add(new AppDesignPlane("transform", CmdDirTransformer.class, CmdOptionTransformer.class, CommandParamTransformer.class, CommandTransformer.class, LoginCommandTransformer.class, RegisterData.class));
     return l;
   }
 
