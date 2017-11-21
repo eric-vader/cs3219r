@@ -13,7 +13,7 @@ We will mention this pattern together with front controller. The front controlle
 
 ## Implementation
 
-We implement 
+We implement the pattern as mentioned in the text book. We will use front controller pattern and use front controller in-place of input controller.
 
 <iframe src="uml/appController"></iframe>
 
