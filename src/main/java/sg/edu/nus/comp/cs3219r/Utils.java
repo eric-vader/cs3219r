@@ -20,6 +20,11 @@ import sg.edu.nus.comp.cs3219r.application.AppView;
 import sg.edu.nus.comp.cs3219r.application.ApplicationController;
 import sg.edu.nus.comp.cs3219r.application.FrontController;
 import sg.edu.nus.comp.cs3219r.command.Command;
+import sg.edu.nus.comp.cs3219r.command.GotoCommand;
+import sg.edu.nus.comp.cs3219r.command.LoginCommand;
+import sg.edu.nus.comp.cs3219r.command.LogoutCommand;
+import sg.edu.nus.comp.cs3219r.command.NextCommand;
+import sg.edu.nus.comp.cs3219r.command.PrevCommand;
 import sg.edu.nus.comp.cs3219r.diagram.Diagram;
 import sg.edu.nus.comp.cs3219r.diagram.Link;
 import sg.edu.nus.comp.cs3219r.diagram.Method;
@@ -155,6 +160,7 @@ public class Utils {
         Node.class, Parameter.class, Property.class, Relationship.class,
         Visibility.class));
     l.add(new AppDesignPlane("appController", ApplicationController.class, FrontController.class, Command.class, AppState.class, AppView.class));
+    l.add(new AppDesignPlane("command", Command.class, GotoCommand.class, LoginCommand.class, LogoutCommand.class, NextCommand.class, PrevCommand.class, ApplicationController.class));
     return l;
   }
 
